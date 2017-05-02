@@ -1,5 +1,5 @@
 //
-//  PlayersViewController.swift
+//  PlayerDetailsViewController.swift
 //  GameBoards
 //
 //  Created by cdsm on 02/05/2017.
@@ -8,10 +8,12 @@
 
 import UIKit
 
-class PlayersViewController: UITableViewController {
+class PlayerDetailsViewController: UITableViewController {
 
-    //add sample data
-    var players:[Player] = playersData
+    @IBOutlet weak var namePlayerInput: UITextField!
+    @IBOutlet weak var titleGameInput: UITableViewCell!
+    
+    var player:Player?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,28 +30,16 @@ class PlayersViewController: UITableViewController {
         // Dispose of any resources that can be recreated.
     }
 
-    // MARK: - Table view data source
 
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        return 1 // we use juste one section
-    }
-
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return players.count
-    }
-
-    
+    /*
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "PlayerCell", for: indexPath) as! PlayerCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
 
         // Configure the cell...
-        // use proper view
-        let player = players[indexPath.row] as Player
-        cell.player = player
 
         return cell
     }
-    
+    */
 
     /*
     // Override to support conditional editing of the table view.
@@ -95,25 +85,18 @@ class PlayersViewController: UITableViewController {
         // Pass the selected object to the new view controller.
     }
     */
-    // used to cancel user's inputs
-    @IBAction func cancelToPlayersViewController(segue:UIStoryboardSegue) {
-    }
-    
-    // used to save user's inputs
-    @IBAction func savePlayerDetail(segue:UIStoryboardSegue) {
-        if let playerDetailsViewController = segue.source as? PlayerDetailsViewController {
-            
-            //add the new player to the players array
-            if let player = playerDetailsViewController.player {
-                players.append(player)
-                
-                //update the tableView
-                let indexPath = IndexPath(row: players.count-1, section: 0)
-                tableView.insertRows(at: [indexPath], with: .automatic)
-            }
-            // could use tableView.reloadData()
+    // set namePlayerInput as responder when the row is pressed
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.section == 0 {
+            namePlayerInput.becomeFirstResponder()
         }
     }
-
+    
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "SavePlayerDetail" {
+            player = Player(name: namePlayerInput.text!, game: "Chess", rating: 1)
+        }
+    }
 
 }
