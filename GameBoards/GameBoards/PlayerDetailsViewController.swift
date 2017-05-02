@@ -12,8 +12,15 @@ class PlayerDetailsViewController: UITableViewController {
 
     @IBOutlet weak var namePlayerInput: UITextField!
     @IBOutlet weak var titleGameInput: UITableViewCell!
+    @IBOutlet weak var nameGameInput: UILabel!
     
     var player:Player?
+    
+    var game:String = "Chess" {
+        didSet {
+            nameGameInput.text = game
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,6 +37,16 @@ class PlayerDetailsViewController: UITableViewController {
         // Dispose of any resources that can be recreated.
     }
 
+    
+    required init?(coder aDecoder: NSCoder) {
+        print("init PlayerDetailsViewController")
+        super.init(coder: aDecoder)
+    }
+    
+    deinit {
+        print("deinit PlayerDetailsViewController")
+    }
+ 
 
     /*
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -95,8 +112,21 @@ class PlayerDetailsViewController: UITableViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "SavePlayerDetail" {
-            player = Player(name: namePlayerInput.text!, game: "Chess", rating: 1)
+            player = Player(name: namePlayerInput.text!, game: game, rating: 1)
+        }
+        // give back the choosen game
+        if segue.identifier == "PickGame" {
+            if let gamePickerViewController = segue.destination as? GamePickerViewController {
+                gamePickerViewController.selectedGame = game
+            }
         }
     }
+    
+    @IBAction func unwindWithSelectedGame(segue: UIStoryboardSegue) {
+        if let gamePickerViewController = segue.source as? GamePickerViewController, let selectedGame = gamePickerViewController.selectedGame {
+            game = selectedGame
+        }
+    }
+    
 
 }

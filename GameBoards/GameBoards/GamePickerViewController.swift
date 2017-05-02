@@ -9,7 +9,25 @@
 import UIKit
 
 class GamePickerViewController: UITableViewController {
-
+    var selectedGame:String? {
+        didSet {
+            if let game = selectedGame {
+                selectedGameIndex = games.index(of: game)!
+            }
+        }
+    }
+    var selectedGameIndex:Int?
+    
+    var games:[String] = [
+        "Who is it?",
+        "Chess",
+        "Russian Roulette",
+        "Spin the Bottle",
+        "Texas Hold'em Poker",
+        "Tic-Tac-Toe"]
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -29,24 +47,58 @@ class GamePickerViewController: UITableViewController {
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 0
+        return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 0
+        return games.count
     }
 
-    /*
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "GameCell", for: indexPath)
 
         // Configure the cell...
+        cell.textLabel?.text = games[indexPath.row]
+        
+        if indexPath.row == selectedGameIndex {
+            cell.accessoryType = .checkmark
+        } else {
+            cell.accessoryType = .none
+        }
 
         return cell
     }
-    */
-
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        
+        //Other row is selected - need to deselect it
+        if let index = selectedGameIndex {
+            let oldCell = IndexPath(row: index, section: 0)
+            let cell = tableView.cellForRow(at: oldCell)
+            cell?.accessoryType = .none
+        }
+        
+        selectedGame = games[indexPath.row]
+        
+        //update the checkmark for the current row
+        let cell = tableView.cellForRow(at: indexPath)
+        cell?.accessoryType = .checkmark
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "SaveSelectedGame" {
+            if let cell = sender as? UITableViewCell {
+                let indexPath = tableView.indexPath(for: cell)
+                if let index = indexPath?.row {
+                    selectedGame = games[index]
+                }
+            }
+        }
+    }
+    
     /*
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
