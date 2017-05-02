@@ -17,6 +17,7 @@
 		2CEEAD831EB88E6600814BA0 /* PlayersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CEEAD821EB88E6600814BA0 /* PlayersViewController.swift */; };
 		2CEEAD851EB88EEA00814BA0 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CEEAD841EB88EEA00814BA0 /* Player.swift */; };
 		2CEEAD871EB88F3000814BA0 /* SampleData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CEEAD861EB88F3000814BA0 /* SampleData.swift */; };
+		2CEEAD891EB8A45300814BA0 /* PlayerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CEEAD881EB8A45300814BA0 /* PlayerCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +54,7 @@
 		2CEEAD821EB88E6600814BA0 /* PlayersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayersViewController.swift; sourceTree = "<group>"; };
 		2CEEAD841EB88EEA00814BA0 /* Player.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		2CEEAD861EB88F3000814BA0 /* SampleData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SampleData.swift; sourceTree = "<group>"; };
+		2CEEAD881EB8A45300814BA0 /* PlayerCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,6 +114,7 @@
 				2CEEAD5D1EB8828100814BA0 /* LaunchScreen.storyboard */,
 				2CEEAD601EB8828100814BA0 /* Info.plist */,
 				2CEEAD821EB88E6600814BA0 /* PlayersViewController.swift */,
+				2CEEAD881EB8A45300814BA0 /* PlayerCell.swift */,
 			);
 			path = GameBoards;
 			sourceTree = "<group>";
@@ -270,6 +273,7 @@
 			files = (
 				2CEEAD851EB88EEA00814BA0 /* Player.swift in Sources */,
 				2CEEAD571EB8828100814BA0 /* ViewController.swift in Sources */,
+				2CEEAD891EB8A45300814BA0 /* PlayerCell.swift in Sources */,
 				2CEEAD551EB8828100814BA0 /* AppDelegate.swift in Sources */,
 				2CEEAD871EB88F3000814BA0 /* SampleData.swift in Sources */,
 				2CEEAD831EB88E6600814BA0 /* PlayersViewController.swift in Sources */,
